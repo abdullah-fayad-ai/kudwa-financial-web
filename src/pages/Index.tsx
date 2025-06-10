@@ -44,10 +44,7 @@ const Index = () => {
         const updatedCompany = companies.find(
           (c) => c.id === selectedCompany.id
         );
-        if (
-          updatedCompany &&
-          JSON.stringify(updatedCompany) !== JSON.stringify(selectedCompany)
-        ) {
+        if (updatedCompany) {
           setSelectedCompany(updatedCompany);
         }
       }
@@ -64,10 +61,17 @@ const Index = () => {
       }
 
       const data = await response.json();
-      setCompanies(data);
 
-      if (data.length > 0 && !selectedCompany) {
-        setSelectedCompany(data[0]);
+      const formattedData = data.map((company: any) => ({
+        ...company,
+        id: String(company.id),
+        configs: company.configs || [],
+      }));
+
+      setCompanies(formattedData);
+
+      if (formattedData.length > 0 && !selectedCompany) {
+        setSelectedCompany(formattedData[0]);
       }
     } catch (error) {
       console.error("Error fetching companies:", error);
@@ -79,12 +83,7 @@ const Index = () => {
   const handleCompanyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = e.target.value;
 
-    let foundCompany = companies.find((c) => String(c.id) === selectedId);
-
-    if (!foundCompany && !isNaN(Number(selectedId))) {
-      const numericId = Number(selectedId);
-      foundCompany = companies.find((c) => Number(c.id) === numericId);
-    }
+    const foundCompany = companies.find((c) => String(c.id) === selectedId);
 
     if (foundCompany) {
       setSelectedCompany(foundCompany);
