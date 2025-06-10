@@ -8,7 +8,6 @@ A full-stack financial data integration and reporting dashboard built with React
 - **Interactive Data Tables**: View, sort, and filter financial data with expandable rows for detailed breakdowns
 - **Data Visualization**: Real-time analytics and interactive charts for financial performance insights
 - **Company Management**: Manage multiple companies and their configurations
-- **Enterprise Ready**: Scalable integration architecture for business needs
 
 ## Tech Stack
 
@@ -16,7 +15,6 @@ A full-stack financial data integration and reporting dashboard built with React
 - **UI Components**: Shadcn UI (Radix UI)
 - **Routing**: React Router
 - **State Management**: React Context API
-- **Data Fetching**: TanStack Query
 - **Form Handling**: React Hook Form with Zod validation
 - **Styling**: Tailwind CSS with class-variance-authority
 - **Build Tool**: Vite
