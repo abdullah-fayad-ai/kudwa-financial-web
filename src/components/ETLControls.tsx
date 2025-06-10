@@ -322,9 +322,9 @@ const ETLControls: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
           <div className="space-y-2">
             <h4 className="font-medium text-sm">Data Sources</h4>
-            {selectedCompany && selectedCompany.configs.length > 0 ? (
+            {selectedCompany && (selectedCompany.configs || []).length > 0 ? (
               <div className="space-y-1">
-                {selectedCompany.configs.map((config) => (
+                {(selectedCompany.configs || []).map((config) => (
                   <div
                     key={config.id}
                     className="flex items-center gap-2 text-sm"

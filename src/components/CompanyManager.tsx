@@ -65,10 +65,16 @@ const CompanyManager: React.FC<CompanyManagerProps> = ({ onCompanyChange }) => {
       }
 
       const data = await response.json();
-      setCompanies(data);
+      // Convert numeric IDs to strings
+      const formattedData = data.map((company: any) => ({
+        ...company,
+        id: String(company.id),
+        configs: company.configs || [],
+      }));
+      setCompanies(formattedData);
 
-      if (data.length > 0 && !selectedCompany) {
-        setSelectedCompany(data[0]);
+      if (formattedData.length > 0 && !selectedCompany) {
+        setSelectedCompany(formattedData[0]);
       }
 
       if (onCompanyChange) {
@@ -111,7 +117,13 @@ const CompanyManager: React.FC<CompanyManagerProps> = ({ onCompanyChange }) => {
         throw new Error("Failed to create company");
       }
 
-      const createdCompany = await response.json();
+      const responseData = await response.json();
+
+      const createdCompany = {
+        ...responseData,
+        id: String(responseData.id),
+        configs: responseData.configs || [],
+      };
 
       setCompanies((prev) => [...prev, createdCompany]);
       setSelectedCompany(createdCompany);
@@ -164,7 +176,13 @@ const CompanyManager: React.FC<CompanyManagerProps> = ({ onCompanyChange }) => {
         throw new Error("Failed to update company");
       }
 
-      const updatedCompany = await response.json();
+      const responseData = await response.json();
+
+      const updatedCompany = {
+        ...responseData,
+        id: String(responseData.id),
+        configs: responseData.configs || [],
+      };
 
       setCompanies((prev) =>
         prev.map((company) =>
@@ -509,7 +527,9 @@ const CompanyManager: React.FC<CompanyManagerProps> = ({ onCompanyChange }) => {
   const renderConfigList = () => {
     if (!selectedCompany) return null;
 
-    if (selectedCompany.configs.length === 0) {
+    const configs = selectedCompany.configs || [];
+
+    if (configs.length === 0) {
       return (
         <div className="text-center py-4 text-muted-foreground">
           <p>
@@ -522,7 +542,7 @@ const CompanyManager: React.FC<CompanyManagerProps> = ({ onCompanyChange }) => {
 
     return (
       <div className="space-y-3">
-        {selectedCompany.configs.map((config) => (
+        {configs.map((config) => (
           <div key={config.id} className="p-3 border rounded-md">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
