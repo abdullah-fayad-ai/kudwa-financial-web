@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://kudwa-financial-etl.onrender.com/api/:path*"
+    }
+  ]
+}
