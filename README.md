@@ -31,7 +31,7 @@ A full-stack financial data integration and reporting dashboard built with React
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/kudwa-financial-web.git
+   git clone https://github.com/abdullah-fayad-ai/kudwa-financial-web.git
    cd kudwa-financial-web
    ```
 
